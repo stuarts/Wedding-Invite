@@ -9,7 +9,6 @@ RedisStore = require('connect-redis')(express)
 app = module.exports = express.createServer()
 
 # Configuration
-
 app.configure ->
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
