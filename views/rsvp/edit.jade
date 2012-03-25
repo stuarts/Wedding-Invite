@@ -1,0 +1,8 @@
+form(action='/rsvps', method='post')
+  | Email:
+  input(type='text', name="email", size=30)#email
+  | Would you like to attend the after party?
+  input(type='checkbox', name="after_party")#after_party
+  | How many?
+  input(type="text", name="group_size", size=2)#group_size
+  input(type="submit", value="I'll be there.")

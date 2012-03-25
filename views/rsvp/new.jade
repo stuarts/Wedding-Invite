@@ -1,0 +1,17 @@
+.rsvp
+  form(action='/rsvps', method='post')#rsvp_form
+    p
+      label(for='name') Name:
+      input(type='text', name='rsvp[name]', size=30)#name
+    p
+      label(for="email") Email:
+      input(type='text', name="rsvp[email]", size=30)#email
+    p Would you like to attend the after party?
+    .party
+      p
+        label(for="after_party") Yes:
+        input(type='checkbox', name="rsvp[after_party]")#after_party
+      p
+        label(for="group_size") How many?
+        input(type="number", name="rsvp[group_size]", size = 2, maxlength=2, min=1, value=1)#group_size
+    input(type="submit", value="I'll be there.")#rsvp_submit
