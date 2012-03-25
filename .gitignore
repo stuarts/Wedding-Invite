@@ -1,0 +1,7 @@
+.DS_Store
+*~
+\#*\#
+/tmp
+/backups
+/log
+/coverage
