@@ -13,12 +13,12 @@ app = module.exports = express.createServer()
 client = null
 
 # Configuration
-app.configure 'development', ->
-  client = redis.createClient()
-
-app.configure 'production', ->
+if process.env.REDISTOGO_URL?
   redisUrl = url.parse(process.env.REDISTOGO_URL)
-  client = redis.createClient(redisUrl.port, redisUrl.hostname)
+  client = redis.createClient redisUrl.port, redisUrl.hostname
+  client.auth redisUrl.auth.split(":")[1]
+else
+  client = redis.createClient()
 
 app.configure ->
   app.set 'views', __dirname + '/views'
