@@ -3,10 +3,13 @@
 
 express = require 'express'
 resource = require 'express-resource'
+redis = require 'redis-url'
 {reqdir, link_mvc} = require './helper'
 RedisStore = require('connect-redis')(express)
 
 app = module.exports = express.createServer()
+
+client = null
 
 # Configuration
 app.configure ->
@@ -26,9 +29,11 @@ app.configure ->
   app.use express.static __dirname + '/public'
 
 app.configure 'development', ->
+  client = redis.connect()
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
+  client = redis.connect(process.env.REDISTOGO_URL)
   app.use express.errorHandler()
 
 # Routes
@@ -37,7 +42,7 @@ models = reqdir "./models"
 controllers = reqdir "./controllers"
 
 application_model = new models.index 'index'
-application_model.defineModels models
+application_model.defineModels models, client
 application_controller = new controllers.index
 application_controller.linkModelsControllers models, controllers
 

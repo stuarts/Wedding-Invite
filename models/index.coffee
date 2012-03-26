@@ -1,16 +1,13 @@
-redis = require 'redis'
 { reqdir } = require "../helper"
 
-client = redis.createClient()
+client = null
 
 model = null
-
 define = (name) ->
   model = (subs...) -> "#{name}s" + if subs?
                                    ":#{subs.join ":"}"
                                  else
                                    ""
-
 static = (to, from) ->
   for key, value of from
     to[key] = value
@@ -75,7 +72,8 @@ class Model
     for param in params
       @definitions[param] = 'require'
 
-  defineModels:(models) ->
+  defineModels:(models, _client) ->
+    client = _client
     @models = models
     for key, definition of models
       @models[key] = definition key, Model if definition != Model
