@@ -3,7 +3,7 @@
 
 express = require 'express'
 resource = require 'express-resource'
-redis = require 'redis-url'
+redis = require 'redis'
 url = require 'url'
 {reqdir, link_mvc} = require './helper'
 RedisStore = require('connect-redis')(express)
@@ -13,11 +13,18 @@ app = module.exports = express.createServer()
 client = null
 
 # Configuration
+app.configure 'development', ->
+  client = redis.createClient()
+
+app.configure 'production', ->
+  redisUrl = url.parse(process.env.REDISTOGO_URL)
+  client = redis.createClient(redisUrl.port, redisUrl.hostname)
+
 app.configure ->
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.cookieParser()
-  app.use express.session secret: "brynn and me walking down a beach", store: new RedisStore
+  app.use express.session secret: "brynn and me walking down a beach", store: new RedisStore( client:client )
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use require('stylus').middleware src: __dirname + '/public'
@@ -30,14 +37,9 @@ app.configure ->
   app.use express.static __dirname + '/public'
 
 app.configure 'development', ->
-  console.log "shouldn't see this"
-  client = redis.createClient()
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
-  console.log 'production cong', process.env.REDISTOGO_URL
-  redisUrl = url.parse(process.env.REDISTOGO_URL)
-  client = redis.createClient(redisUrl.port, redisUrl.hostname)
   app.use express.errorHandler()
 
 # Routes
