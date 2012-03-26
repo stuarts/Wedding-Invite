@@ -13,6 +13,5 @@
 		, "coffee-script": "*"
 		, "express-coffee": "*"
 		, "redis": "*"
-		, 'redis-url': "*"
   }
 }
