@@ -29,6 +29,7 @@ app.configure ->
   app.use express.static __dirname + '/public'
 
 app.configure 'development', ->
+  console.log "shouldn't see this"
   client = redis.connect()
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
