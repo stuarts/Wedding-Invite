@@ -4,6 +4,7 @@
 express = require 'express'
 resource = require 'express-resource'
 redis = require 'redis-url'
+url = require 'url'
 {reqdir, link_mvc} = require './helper'
 RedisStore = require('connect-redis')(express)
 
@@ -30,12 +31,13 @@ app.configure ->
 
 app.configure 'development', ->
   console.log "shouldn't see this"
-  client = redis.connect()
+  client = redis.createClient()
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
   console.log 'production cong', process.env.REDISTOGO_URL
-  client = redis.connect(process.env.REDISTOGO_URL)
+  redisUrl = url.parse(process.env.REDISTOGO_URL)
+  client = redis.createClient(redisUrl.port, redisUrl.hostname)
   app.use express.errorHandler()
 
 # Routes
