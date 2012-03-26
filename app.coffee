@@ -33,6 +33,7 @@ app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
+  console.log 'production cong', process.env.REDISTOGO_URL
   client = redis.connect(process.env.REDISTOGO_URL)
   app.use express.errorHandler()
 
