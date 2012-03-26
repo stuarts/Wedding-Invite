@@ -19,21 +19,59 @@ class ValidationError extends Error
   constructor:(@unmet_reqs) ->
 
 class Model
+  @Map =
+    checked: (val) -> val == 'on' || val
+    number: (val) -> Number(val)
+    boolean: (should_be) -> (val) -> should_be == val || val
+
   @ValidationError = ValidationError
   constructor: (@name, params={})->
     @key = define @name
-    @definitions = {}
-    @params = {}
     @required "id"
     if not params.id?
       params.id = 'find_out'
     @set params
 
+  mapping: (@maps) ->
+
+  map: (data) ->
+    for key, mapper of @maps
+      data[key] = mapper data[key]
+    @
+
+  set: (params) ->
+    @params = @params ? {}
+    for param, allowance of @definitions
+      @params[param] = params[param]
+    @params
+
+  validate: (params=@params) ->
+    validation_errors = []
+    for param, allowance of @definitions
+      if allowance != "allow"
+        if 'function' is typeof allowance
+          if not allowance @params[param]
+            validation_errors.push param
+        else if not params[param]? or params[param] is ""
+          validation_errors.push param
+    if validation_errors.length
+      throw new ValidationError validation_errors
+    @
+
   allowed: (params...) ->
+    @definitions = @definitions ? {}
     for param in params
       @definitions[param] = 'allow'
 
-  required: (params...) ->
+  required: (with_validators, params...) ->
+    if 'string' is typeof with_validators
+      params.unshift with_validators
+      with_validators = null
+
+    @definitions = @definitions ? {}
+    if with_validators?
+      for key, val of with_validators
+        @definitions[key] = val
     for param in params
       @definitions[param] = 'require'
 
@@ -50,9 +88,7 @@ class Model
               for id in ids
                 multi.hgetall model(id)
               multi.exec (err, replies) ->
-                _models = for model_params in replies
-                  new models[key] model_params
-                cb _models
+                cb replies
             else
               cb []
 
@@ -60,17 +96,9 @@ class Model
           client.get model(id), (err, model_params) ->
             cb new models[key] (model_params)
 
-  set: (params) =>
-    validation_errors = []
-    for param, allowance in @definitions
-      @params[param] = params[param]
-      if allowance is "require" and not @params[param]?
-        validation_errors.push param
-    if validation_errors.length
-      throw new ValidationError validation_errors
+        ValidationError: ValidationError
 
-  save:(cb) =>
-
+  save:(cb) ->
     client.incr @key("next.id"), (err, next_id) =>
       @params.id = next_id
       throw err if err

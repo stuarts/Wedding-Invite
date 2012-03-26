@@ -10,8 +10,8 @@
       "express": "*"
     , "stylus": "*"
     , "jade": "*"
-	, "coffee-script": "*"
-	, "express-coffee": "*"
-	, "redis": "*"
+		, "coffee-script": "*"
+		, "express-coffee": "*"
+		, "redis": "*"
   }
 }

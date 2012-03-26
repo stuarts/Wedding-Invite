@@ -4,14 +4,18 @@
 module.exports = class Controller
   constructor:(controllers) ->
     @controllers = {}
+
+  linkModelsControllers: (models, controllers) ->
     for key, factory of controllers when factory != Controller
-      Child = factory(Controller)
+      Model = models[key]
+      Child = factory(Controller, Model)
       @controllers[key] = new Child
+
+    for key, model of models
+      @controllers[key]?.link key, model
     @controllers.index = @
 
   setModels: (models) =>
-    for key, model of models
-      @controllers[key]?.link key, model
 
   link: (key, model) => @model = model
   index: (req, res) =>

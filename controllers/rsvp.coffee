@@ -1,29 +1,32 @@
-module.exports = (Controller) ->
+module.exports = (Controller, RSVP) ->
   class RSVPController extends Controller
     constructor:() ->
+
     index: (req, res) =>
-      @RSVP.all (rsvps) ->
-        rsvp_data = (rsvp.params for rsvp in rsvps)
+      RSVP.all (rsvps) ->
         res.render 'rsvp/index',
           title: "RSVP"
-          rsvps: rsvp_data
+          rsvps: rsvps
+
     new: (req, res) ->
-      console.log flash 'error'
       res.render "rsvp/new",
         title: "RSVP"
+        validation: req.validation ? () ->
+        rsvp: if req.body.rsvp?
+                req.body.rsvp
+              else
+                group_size: 1
+
     create: (req, res) =>
       try
-        new @RSVP(req.body.rsvp).save (err)->
+        new RSVP(req.body.rsvp).validate().save (err)->
           if err?
             throw err
           else
             res.redirect "/rsvps"
       catch e
-        if e instanceof Model.ValidationError
-          console.log e
-          for req_field in e.unmet_reqs
-            req.flash 'error', "You must set #{req_field}"
-          res.redirect 'back'
-
-    link:(key, @RSVP) =>
-      @model = @RSVP
+        if e instanceof RSVP.ValidationError
+          req.validation = (name) ->
+            if name in e.unmet_reqs
+              'needs_validation'
+          @new req, res

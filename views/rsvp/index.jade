@@ -1,9 +1,11 @@
 h1= title
 p Welcome to #{title}
-each rsvp in rsvps
-  ul
-    li email: #{rsvp.email}
-    li party: #{rsvp.after_party}
-    li number: #{rsvp.group_size}
+ul
+  each rsvp in rsvps
+    li
+      p name: #{rsvp.name}
+      p email: #{rsvp.email}
+      p party: #{rsvp.after_party}
+      p number: #{rsvp.group_size}
 
 

@@ -38,8 +38,8 @@ controllers = reqdir "./controllers"
 
 application_model = new models.index 'index'
 application_model.defineModels models
-application_controller = new controllers.index controllers
-application_controller.setModels application_model.models
+application_controller = new controllers.index
+application_controller.linkModelsControllers models, controllers
 
 routes = require('./routes') app, application_controller.controllers
 

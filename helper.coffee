@@ -8,7 +8,6 @@ exports.reqdir = (include_path) ->
     file_name = file.replace /\.js|\.coffee/, ""
     file_path = path.resolve include_path, file_name
     namespace[file_name] = require file_path
-  console.log include_path, "namespace", namespace
   namespace
 
 exports.link_mvc = (controllers, models, provider) ->

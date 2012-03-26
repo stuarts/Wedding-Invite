@@ -6,5 +6,11 @@ a {
   color: #00b7ff;
 }
 #group_size {
-  width: 2em;
+  width: 3em;
+}
+ul {
+  list-style-position: outside;
+}
+.needs_validation {
+  background: #f5d0cb;
 }
