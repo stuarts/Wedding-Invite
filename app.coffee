@@ -8,6 +8,13 @@ url = require 'url'
 {reqdir, link_mvc} = require './helper'
 RedisStore = require('connect-redis')(express)
 
+Controller = require './Controller'
+Model = require './Model'
+
+models = reqdir "./models"
+controllers = reqdir "./controllers"
+
+
 app = module.exports = express.createServer()
 
 client = null
@@ -44,12 +51,11 @@ app.configure 'production', ->
 
 # Routes
 
-models = reqdir "./models"
-controllers = reqdir "./controllers"
 
-application_model = new models.index 'index'
+application_model = new Model 'app'
 application_model.defineModels models, client
-application_controller = new controllers.index
+
+application_controller = new Controller
 application_controller.linkModelsControllers models, controllers
 
 routes = require('./routes') app, application_controller.controllers

@@ -9,8 +9,10 @@ module.exports = (Controller, RSVP) ->
           rsvps: rsvps
 
     new: (req, res) ->
+      layout = req.format isnt "ajax"
       res.render "rsvp/new",
         title: "RSVP"
+        layout: layout
         validation: req.validation ? () ->
         rsvp: if req.body.rsvp?
                 req.body.rsvp
