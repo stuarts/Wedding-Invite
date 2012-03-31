@@ -17,9 +17,9 @@ class ValidationError extends Error
 
 class Model
   @Map =
-    checked: (val) -> val == 'on' || val
+    checked: (val) -> val == 'on'
     number: (val) -> Number(val)
-    boolean: (should_be) -> (val) -> should_be == val || val
+    boolean: (should_be) -> (val) -> should_be == val
 
   @ValidationError = ValidationError
   constructor: (@name, params={})->
