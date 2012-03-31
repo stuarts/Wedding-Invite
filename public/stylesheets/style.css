@@ -5,6 +5,11 @@ body {
 a {
   color: #00b7ff;
 }
+
+.image {
+	height: 100px;
+}
+
 #group_size {
   width: 3em;
 }
@@ -13,4 +18,18 @@ ul {
 }
 .needs_validation {
   background: #f5d0cb;
+}
+.rsvp_container {
+  position: fixed;
+  height: 100%;
+  width: 30%;
+  top: 0px;
+  right: 0px;
+  background: url("http://blog.paintedpixels.com/wp-content/uploads/2009/06/6809-300x300.jpg");
+  opacity: 0.3;
+}
+.rsvp_container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
