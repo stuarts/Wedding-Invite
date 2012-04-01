@@ -10,14 +10,18 @@ module.exports = (Controller, RSVP) ->
 
     new: (req, res) ->
       layout = req.format isnt "ajax"
+      validation_errors = req.session.validation_errors ? []
+      validation = (name) ->
+        if name in validation_errors
+          'needs_validation'
+      rsvp =  req.body.rsvp ? req.session.rsvp ? group_size : 1
+      delete req.session.rsvp
+      delete req.session.validation_errors
       res.render "rsvp/new",
         title: "RSVP"
         layout: layout
-        validation: req.validation ? () ->
-        rsvp: if req.body.rsvp?
-                req.body.rsvp
-              else
-                group_size: 1
+        validation: validation
+        rsvp: rsvp
 
     create: (req, res) =>
       try
@@ -28,7 +32,6 @@ module.exports = (Controller, RSVP) ->
             res.redirect "/rsvps"
       catch e
         if e instanceof RSVP.ValidationError
-          req.validation = (name) ->
-            if name in e.unmet_reqs
-              'needs_validation'
-          @new req, res
+          req.session.rsvp = req.body.rsvp
+          req.session.validation_errors = e.unmet_reqs
+          res.redirect 'back'

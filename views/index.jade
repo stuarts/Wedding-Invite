@@ -8,7 +8,7 @@ h1 Brynn and Stuart's Wedding!
 			li at two o'clock in the afternoon
 		p
 		ul(class="date")
-			li 
+			li
 				a(href="http://maps.google.com/maps?q=parsons+garden+seattle&um=1&ie=UTF-8&hl=en&sa=N&tab=wl") Parsons Garden
 			li 7201 E Green Lake Dr N
 			li Seattle, Washington
@@ -16,4 +16,4 @@ h1 Brynn and Stuart's Wedding!
 		p There will be a picnic reception to follow with snacks and quilts for lounging on the lawn. Please dress appropriately.
 
 .rsvp_container
-	iframe(src='/rsvps/new')
+  != partial('rsvp/rsvp', rsvp)
