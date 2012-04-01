@@ -1,5 +1,5 @@
 body {
-  font: 13px "Georgia", Arial, sans-serif;
+  font: 13px "Courier", Arial, sans-serif;
   color: #808080;
   background-color: #edfaff;
 }
@@ -15,13 +15,13 @@ a {
   text-decoration: none;
 }
 h1 {
-  font-family: 'Astloch', cursive;
+  font-family: 'Cedarville Cursive', cursive;
   font-weight: normal;
-  font-size: 44pt;
-  color: #008fc7;
+  font-size: 32px;
+  color: #90817e;
 }
 h2 {
-  font-family: 'Astloch', cursive;
+  font-family: 'Cedarville Cursive', cursive;
   font-weight: bold;
   font-size: 24px;
   color: #175682;
@@ -50,8 +50,8 @@ ul {
   padding: 0px;
 }
 li {
-  font: 13px "Georgia", Arial, sans-serif;
-  color: #808080;
+  font: 12px "Courier", Arial, sans-serif;
+  color: #999;
   list-style: none;
 }
 .needs_validation {
