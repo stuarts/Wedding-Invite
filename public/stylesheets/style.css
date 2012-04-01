@@ -1,15 +1,37 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 50px 50px 50px 100px;
+  font: 16px "Georgia", Arial, sans-serif;
+  color: #808080;
+  margin: auto;
+}
+table,
+th,
+td,
+input,
+textarea {
+  font: 14px "Georgia", Arial, sans-serif;
 }
 a {
   color: #00b7ff;
+  text-decoration: none;
 }
-
-.image {
-	height: 100px;
+h1 {
+  font-family: 'Astloch', cursive;
+  font-weight: normal;
+  font-size: 44pt;
+  color: #000;
 }
-
+.content {
+  width: 1000px;
+}
+.info {
+  float: left;
+  padding: 0px 80px 0px 20px;
+}
+.date {
+  text-align: center;
+  list-style: none;
+}
 #group_size {
   width: 3em;
 }
@@ -22,11 +44,9 @@ ul {
 .rsvp_container {
   position: fixed;
   height: 100%;
-  width: 30%;
+  width: 400px;
   top: 0px;
   right: 0px;
-  background: url("http://blog.paintedpixels.com/wp-content/uploads/2009/06/6809-300x300.jpg");
-  opacity: 0.3;
 }
 .rsvp_container iframe {
   width: 100%;
