@@ -1,5 +1,5 @@
 module.exports = (Controller, Index) ->
-  class Index extends Controller
+  class IndexController extends Controller
     constructor:(controllers) ->
     index: (req, res) ->
       validation_errors = req.session.validation_errors ? []
@@ -9,10 +9,14 @@ module.exports = (Controller, Index) ->
       rsvp =  req.body.rsvp ? req.session.rsvp ? group_size : 1
       delete req.session.rsvp
       delete req.session.validation_errors
+
       res.render 'index',
         title: "hello"
         validation: validation
         rsvp: rsvp
+        rsvp_id: req.session.rsvp_id
+        method: 'post'
+
 
     new: (req, res) ->
     create: (req, res) =>

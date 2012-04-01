@@ -18,20 +18,52 @@ module.exports = (Controller, RSVP) ->
       delete req.session.rsvp
       delete req.session.validation_errors
       res.render "rsvp/new",
+        validation: validation
+        method: 'post'
         title: "RSVP"
         layout: layout
-        validation: validation
         rsvp: rsvp
 
     create: (req, res) =>
       try
-        new RSVP(req.body.rsvp).validate().save (err)->
+        rsvp = new RSVP(req.body.rsvp).validate()
+        rsvp.setId rsvp.params.id
+        rsvp.save (err)->
           if err?
             throw err
           else
-            res.redirect "/rsvps"
+            req.session.rsvp_id = rsvp.params.id
+            res.redirect "/"
       catch e
         if e instanceof RSVP.ValidationError
           req.session.rsvp = req.body.rsvp
           req.session.validation_errors = e.unmet_reqs
           res.redirect 'back'
+
+    edit: (req, res) =>
+      res.render 'rsvp/edit',
+        title: "Edit My RSVP"
+        validation: ()->
+        method: 'put'
+        rsvp: req.rsvp.params
+
+
+    update: (req, res) ->
+      try
+        console.log req.body
+        rsvp = new RSVP(req.body.rsvp).validate()
+        rsvp.setId rsvp.params.id
+        rsvp.save (err)->
+          if err?
+            throw err
+          else
+            req.session.rsvp_id = rsvp.params.id
+            res.redirect "/"
+      catch e
+        if e instanceof RSVP.ValidationError
+          req.session.rsvp = req.body.rsvp
+          req.session.validation_errors = e.unmet_reqs
+          res.redirect 'back'
+
+
+

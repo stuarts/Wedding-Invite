@@ -1,4 +1,5 @@
 { reqdir } = require "./helper"
+{ createHash } = require 'crypto'
 
 client = null
 
@@ -55,6 +56,8 @@ class Model
       throw new ValidationError validation_errors
     @
 
+  index: (@indexes) ->
+
   allowed: (params...) ->
     @definitions = @definitions ? {}
     for param in params
@@ -80,7 +83,7 @@ class Model
       model = define key
       static @models[key],
         all: (cb) ->
-          client.lrange model('index'), 0, -1, (err, ids) ->
+          client.zrange model('index'), 0, -1, (err, ids) ->
             if ids?
               multi = client.multi()
               for id in ids
@@ -91,19 +94,33 @@ class Model
               cb []
 
         get: (id, cb) ->
-          client.get model(id), (err, model_params) ->
-            cb new models[key] (model_params)
+          client.hgetall model(id), (err, model_params) ->
+            cb err, new models[key] (model_params)
 
         ValidationError: ValidationError
 
+
+  setId: (id) ->
+    shasum = createHash 'sha1'
+    shasum.update id
+    @params.id = shasum.digest 'base64'
+
+
   save:(cb) ->
-    client.incr @key("next.id"), (err, next_id) =>
-      @params.id = next_id
-      throw err if err
+    save = () =>
       multi = client.multi()
-      multi.hmset @key(next_id), @params
-      multi.rpush @key("index"), next_id
-      multi.exec (err, replies) ->
+      multi.hmset @key(@params.id), @params
+      multi.zadd @key("index"), Date.now(), @params.id
+      multi.exec (err, replies) =>
         cb(err) if cb?
+
+    if @params.id is 'find_out'
+      client.incr @key("next.id"), (err, next_id) =>
+        console.log next_id, 'next_id'
+        @params.id = next_id
+        throw err if err
+        save()
+    else
+      save()
 
 module.exports = Model

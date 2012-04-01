@@ -1,21 +1,24 @@
 .rsvp
-	form(action='/rsvps', method='post')#rsvp_form
-		p(class=validation('name'))
-			label(for='name') Name: 
-			input(type='text',	name='rsvp[name]', size=30, value=rsvp.name)#name
-		p(class=validation('email'))
-			label(for="email") Email: 
-			input(type='text', name="rsvp[email]", size=30, value=rsvp.email)#email
-		p
-			input(type='checkbox', name="rsvp[after_party]", checked=rsvp.after_party)#after_party
-			| 
-			label(for="after_party") I'll be at the picnic
-		.party
-			p
-				input(type='checkbox', name="rsvp[after_party]", checked=rsvp.after_party)#after_party
-				| 
-				label(for="after_party") I'll be at the after party
-			p(class=validation('group_size'))
-				label(for="group_size") How many? 
-				input(type="number", name="rsvp[group_size]", size = 2, maxlength=2, min=1, value=rsvp.group_size)#group_size
-		input(type="submit", value="Yay!")#rsvp_submit
+  form(action='/rsvps#{ rsvp.id ? "/"+rsvp.id : "" }', method='post')#rsvp_form
+    input(type='hidden', name='_method', value=method)
+    if rsvp.id
+      input(type='hidden', name='rsvp[id]', value=rsvp.id)
+    p(class=validation('name'))
+      label(for='name') Name:
+      input(type='text',  name='rsvp[name]', size=30, value=rsvp.name)#name
+    p(class=validation('email'))
+      label(for="email") Email:
+      input(type='text', name="rsvp[email]", size=30, value=rsvp.email)#email
+    p
+      input(type='checkbox', name="rsvp[picnic]", checked=rsvp.picnic)#picnic
+      | 
+      label(for="after_party") I'll be at the picnic
+    .party
+      p
+        input(type='checkbox', name="rsvp[after_party]", checked=rsvp.after_party)#after_party
+        | 
+        label(for="after_party") I'll be at the after party
+      p(class=validation('group_size'))
+        label(for="group_size") How many?
+        input(type="number", name="rsvp[group_size]", size = 2, maxlength=2, min=1, value=rsvp.group_size)#group_size
+    input(type="submit", value="Yay!")#rsvp_submit
