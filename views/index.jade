@@ -1,8 +1,8 @@
-div(class="tombstone")
-h1 Brynn and Stuart's Wedding!
 
 .content
 	div(class="info")
+		h1 Brynn and Stuart's Wedding!
+
 		ul(class="tombstone")
 			li We would like our friends and family to join us in celebrating our marriage
 
@@ -20,13 +20,15 @@ h1 Brynn and Stuart's Wedding!
 
 		h2 Reception
 		ul(class="tombstone")
-			li There will be a picnic reception to follow with snacks, pie and icecream, and quilts for lounging on the lawn
+			li Picnic reception to follow with snacks, pie and icecream, and quilts for lounging on the lawn
 			li Please dress appropriately
 
 		h2 Afterparty
 		ul(class="tombstone")
 			li As no alcohol is permitted at the park, there will be an afterparty for boozing and dancing
-			li Liberty
+			p
+			li 
+				a(href="http://www.libertybars.com/") Liberty
 			li Address goes here
 			li Eight o'clock in the evening to ?
 			li Kids welcome!
@@ -35,7 +37,12 @@ h1 Brynn and Stuart's Wedding!
 		ul(class="tombstone")
 			li No gifts!
 			li Pies OK!
+		div(class="image")
+			img(src="/images/frankenbride.jpg")
 
 .rsvp_container
+	li We hope you can be a part of our special day...
+	
+	h2 RSVP
 	!= partial('rsvp/rsvp', rsvp)
-	img(src="/images/frankenbride.jpg")
+	
