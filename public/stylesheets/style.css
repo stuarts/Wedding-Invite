@@ -1,5 +1,5 @@
 body {
-  font: 16px "Georgia", Arial, sans-serif;
+  font: 13px "Georgia", Arial, sans-serif;
   color: #808080;
   background-color: #edfaff;
 }
@@ -17,7 +17,7 @@ a {
 h1 {
   font-family: 'Astloch', cursive;
   font-weight: bold;
-  font-size: 44pt;
+  font-size: 38pt;
   color: #044d82;
 }
 h2 {
@@ -50,7 +50,7 @@ ul {
   padding: 0px;
 }
 li {
-  font: 16px "Georgia", Arial, sans-serif;
+  font: 13px "Georgia", Arial, sans-serif;
   color: #808080;
   list-style: none;
 }
