@@ -2,7 +2,6 @@ body {
   padding: 50px 50px 50px 100px;
   font: 16px "Georgia", Arial, sans-serif;
   color: #808080;
-  margin: auto;
 }
 table,
 th,
@@ -21,14 +20,21 @@ h1 {
   font-size: 44pt;
   color: #000;
 }
+h2 {
+  font-family: 'Astloch', cursive;
+  font-weight: normal;
+  font-size: 28px;
+  color: #00b7ff;
+}
 .content {
   width: 1000px;
+  text-align: center;
 }
 .info {
   float: left;
   padding: 0px 80px 0px 20px;
 }
-.date {
+.tombstone {
   text-align: center;
   list-style: none;
 }
@@ -37,6 +43,10 @@ h1 {
 }
 ul {
   list-style-position: outside;
+}
+li {
+  font: 16px "Georgia", Arial, sans-serif;
+  color: #808080;
 }
 .needs_validation {
   background: #f5d0cb;
