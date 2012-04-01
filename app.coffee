@@ -40,6 +40,7 @@ app.configure ->
     live: true
     uglify: false
     debug: true
+  app.use express.favicon __dirname + '/public/favicon.ico'
   app.use app.router
   app.use express.static __dirname + '/public'
 

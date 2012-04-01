@@ -1,5 +1,8 @@
 .rsvp
-  form(action='/rsvps', method='post')#rsvp_form
+  form(action='/rsvps#{ rsvp.id ? "/"+rsvp.id : "" }', method='post')#rsvp_form
+    input(type='hidden', name='_method', value=method)
+    if rsvp.id
+      input(type='hidden', name='rsvp[id]', value=rsvp.id)
     p(class=validation('name'))
       label(for='name') Name:
       input(type='text',  name='rsvp[name]', size=30, value=rsvp.name)#name
