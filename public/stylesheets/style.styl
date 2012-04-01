@@ -1,6 +1,12 @@
 opacity(n)
 	opacity: n
 	
+shadow()
+	-moz-box-shadow: arguments;
+	-webkit-box-shadow: arguments;
+	box-shadow: arguments;
+	
+	
 body
 	font: 16px "Georgia", Arial, sans-serif;
 	color: gray;
@@ -21,7 +27,7 @@ h1
 	//font-family: 'Amatic SC', cursive;
 	//font-family: 'Dawning of a New Day', cursive;
 	//font-family: 'UnifrakturMaguntia', cursive;
-	font-weight: normal;
+	font-weight: bold;
 	font-size: 44pt;
 	color: #00356d;
 	
@@ -41,8 +47,11 @@ h2
 .info
 	width: 800px
 	margin: auto
+	margin-top: 30px;
+	margin-bottom: 30px;
 	background-color: #ffffff;
-	padding: 40px;
+	padding: 40px 0px 40px 0px;
+	shadow: 0px 0px 3px rgba(0,53,109, .3);
 	
 
 .tombstone
@@ -66,12 +75,13 @@ li
 
 
 .rsvp_container
-	position: absolute
+	position: fixed;
 	width: 400px
-	top: 300px
-	right: 0px
-	padding: 40px;
+	top: 250px
+	right: 30px
+	padding: 0px 40px 40px 40px;
 	background-color: #ffffff;
+	shadow: -5px 5px 10px rgba(0,53,109, .3);
 
 .image
 	padding-top: 20px;
