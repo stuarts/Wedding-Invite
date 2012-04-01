@@ -6,6 +6,7 @@ resource = require 'express-resource'
 redis = require 'redis'
 url = require 'url'
 {reqdir, link_mvc} = require './helper'
+
 RedisStore = require('connect-redis')(express)
 
 Controller = require './Controller'
@@ -26,6 +27,9 @@ if process.env.REDISTOGO_URL?
   client.auth redisUrl.auth.split(":")[1]
 else
   client = redis.createClient()
+
+client.on "error", (err) ->
+    console.log ("Error " + err)
 
 app.configure ->
   app.set 'views', __dirname + '/views'

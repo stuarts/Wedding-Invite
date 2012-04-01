@@ -6,9 +6,10 @@ module.exports = (name, Model) ->
 
       @mapping
         after_party: Model.Map.checked
+        picnic: Model.Map.checked
         group_size: Model.Map.number
 
-      @allowed "after_party"
+      @allowed "after_party", 'picnic'
       @required "email", "name"
       @required
         group_size: (val) -> !isNaN val

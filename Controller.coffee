@@ -31,5 +31,4 @@ module.exports = class Controller
   update: (req, res) ->
   destroy: (req, res) ->
   load: (id, fn) ->
-    console.log 'id', id
     @model?.get id, fn
