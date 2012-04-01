@@ -1,8 +1,14 @@
 opacity(n)
 	opacity: n
 	
+shadow()
+	-moz-box-shadow: arguments;
+	-webkit-box-shadow: arguments;
+	box-shadow: arguments;
+	
+	
 body
-	font: 16px "Georgia", Arial, sans-serif;
+	font: 13px "Georgia", Arial, sans-serif;
 	color: gray;
 	background-color: #edfaff;
 
@@ -23,14 +29,14 @@ h1
 	//font-family: 'UnifrakturMaguntia', cursive;
 	font-weight: normal;
 	font-size: 44pt;
-	color: #00356d;
+	color: #008fc7;
 	
 	
 h2
 	font-family: 'Astloch', cursive;
-	font-weight: normal;
-	font-size: 30px;
-	color: #00B7FF;
+	font-weight: bold;
+	font-size: 24px;
+	color: #175682;
 	
 .content
 	text-align: center;
@@ -41,8 +47,11 @@ h2
 .info
 	width: 800px
 	margin: auto
+	margin-top: 30px;
+	margin-bottom: 30px;
 	background-color: #ffffff;
-	padding: 40px;
+	padding: 40px 0px 40px 0px;
+	//shadow: 0px 0px 3px rgba(0,53,109, .3);
 	
 
 .tombstone
@@ -57,7 +66,7 @@ ul
 	padding: 0px;
 	
 li
-	font: 16px "Georgia", Arial, sans-serif;
+	font: 13px "Georgia", Arial, sans-serif;
 	color: gray; 
 	list-style: none;
 
@@ -66,12 +75,13 @@ li
 
 
 .rsvp_container
-	position: absolute
+	position: fixed;
 	width: 400px
-	top: 300px
-	right: 0px
-	padding: 40px;
+	top: 250px
+	right: 30px
+	padding: 0px 40px 40px 40px;
 	background-color: #ffffff;
+	shadow: -3px 3px 10px rgba(0,53,109, .3);
 
 .image
 	padding-top: 20px;

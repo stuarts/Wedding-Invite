@@ -15,13 +15,13 @@
 		ul(class="tombstone")
 			li
 				a(href="http://maps.google.com/maps?q=parsons+garden+seattle&um=1&ie=UTF-8&hl=en&sa=N&tab=wl") Parsons Garden
-			li 7201 E Green Lake Dr N
+			li 7th Ave W and W Highland Dr
 			li Seattle, Washington
 
 		h2 Reception
 		ul(class="tombstone")
 			li Picnic reception to follow with snacks, pie and icecream, and quilts for lounging on the lawn
-			li Please dress appropriately
+			li Please dress accordingly
 
 		h2 Afterparty
 		ul(class="tombstone")
@@ -37,18 +37,17 @@
 		ul(class="tombstone")
 			li No gifts!
 			li Pies OK!
+
 		div(class="image")
 			img(src="/images/frankenbride.jpg")
-
+			p We hope you can be a part of our special day...
 .rsvp_container
 	if rsvp_id
-		p Thanks for replying! Change your rsvp 
+		p Thanks for replying! Change your rsvp
 			a(href='/rsvps/#{rsvp_id}/edit') here
 			| .
 	else
 		p We hope you can be a part of our special day...
-
-		h2 RSVP
+		h2(style="color:#175682; font-weight:bold") RSVP
 		!= partial('rsvp/rsvp', rsvp)
 		Need to change your rsvp?
-
