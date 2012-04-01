@@ -20,7 +20,7 @@ module.exports = class Controller
   link: (key, model) => @model = model
   index: (req, res) =>
     res.render 'index',
-      title: "hello"
+      title: "Brynn and Stuart's Wedding!"
   new: (req, res) =>
   create: (req, res) =>
   show: (req, res) =>
