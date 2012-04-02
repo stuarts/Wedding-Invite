@@ -13,6 +13,11 @@ static = (to, from) ->
   for key, value of from
     to[key] = value
 
+hash = (id) ->
+  shasum = createHash 'sha1'
+  shasum.update id
+  shasum.digest('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '')
+
 class ValidationError extends Error
   constructor:(@unmet_reqs) ->
 
@@ -32,16 +37,20 @@ class Model
 
   mapping: (@maps) ->
 
-  map: (data) ->
+  map: () ->
     for key, mapper of @maps
-      data[key] = mapper data[key]
+      @params[key] = mapper @params[key]
     @
 
   set: (params) ->
     @params = @params ? {}
     for param, allowance of @definitions
-      @params[param] = params[param]
-    @params
+      value = params[param]
+      value = parseFloat(value) if not isNaN value
+      value = true if value == "true"
+      value = false if value == "false"
+      @params[param] = value
+    @
 
   validate: (params=@params) ->
     validation_errors = []
@@ -93,6 +102,9 @@ class Model
             else
               cb []
 
+        searchById: (id, cb) ->
+          @get hash(id), cb
+
         get: (id, cb) ->
           client.hgetall model(id), (err, model_params) ->
             cb err, new models[key] (model_params)
@@ -100,11 +112,20 @@ class Model
         ValidationError: ValidationError
 
 
-  setId: (id) ->
-    shasum = createHash 'sha1'
-    shasum.update id
-    @params.id = shasum.digest 'base64'
+  destroy: () ->
+    client.del @key(@params.id)
+    client.zrem @key('index'), @params.id
 
+  updateId: (id) ->
+    console.log 'here', hash
+    sha_id = hash id
+    console.log 'after hash'
+    if sha_id isnt @params.id
+      @destroy()
+      @params.id = sha_id
+
+  setId: (id) ->
+    @params.id = hash id
 
   save:(cb) ->
     save = () =>

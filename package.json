@@ -11,7 +11,7 @@
     , "stylus": "*"
     , "jade": "*"
 		, "coffee-script": "*"
-		, "express-coffee": "*"
+		, "express-coffee": "https://github.com/stuarts/express-resource/tarball/master"
 		, "redis": "*"
   }
 }
