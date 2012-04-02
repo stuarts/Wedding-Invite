@@ -11,7 +11,7 @@ module.exports = (Controller, Index) ->
       delete req.session.validation_errors
 
       res.render 'index',
-        title: "hello"
+        title: "Brynn and Stuart's Wedding"
         validation: validation
         rsvp: rsvp
         rsvp_id: req.session.rsvp_id

@@ -1,7 +1,7 @@
 
 .content
 	div(class="info")
-		h1 Brynn and Stuart's Wedding!
+		img(src="/images/invite_writing.png")
 
 		ul(class="tombstone")
 			li We would like our friends and family to join us in celebrating our marriage
@@ -18,12 +18,12 @@
 			li 7th Ave W and W Highland Dr
 			li Seattle, Washington
 
-		h2(style="color:#ffc55c") Reception
+		img(src="/images/reception.png")
 		ul(class="tombstone")
 			li Picnic reception to follow with snacks, pie and icecream, and quilts for lounging on the lawn
 			li Please dress accordingly
 
-		h2(style="color:#F5A1A1") Afterparty
+		img(src="/images/afterparty.png")
 		ul(class="tombstone")
 			li As no alcohol is permitted at the park, there will be an afterparty for boozing and dancing
 			p
@@ -33,7 +33,7 @@
 			li Eight o'clock in the evening to ?
 			li Kids welcome!
 
-		h2(style="color:#eb1c38") Please!
+		img(src="/images/please.png")
 		ul(class="tombstone")
 			li No gifts!
 			li Pies OK!
@@ -43,11 +43,11 @@
 			p We hope you can be a part of our special day...
 .rsvp_container
 	if rsvp_id
-		p Thanks for replying! Change your rsvp
+		p Thanks for replying! Change your rsvp 
 			a(href='/rsvps/#{rsvp_id}/edit') here
 			| .
 	else
-		h2(style="color:#175682; font-weight:bold") RSVP
+		img(src="/images/rsvp.png")
 		!= partial('rsvp/rsvp', rsvp)
 		p
 			a(href='/rsvps/search') Need to change your rsvp?

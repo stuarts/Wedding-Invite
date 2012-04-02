@@ -1,30 +1,18 @@
 body {
-  font: 13px "Courier", Arial, sans-serif;
+  font: 13px "Courier", Helvetica, Arial, sans-serif;
   color: #808080;
-  background-color: #edfaff;
+  background: url("/images/tissuepaper.jpg");
 }
 table,
 th,
 td,
 input,
 textarea {
-  font: 14px "Georgia", Arial, sans-serif;
+  font: 14px "Courier", Arial, sans-serif;
 }
 a {
   color: #4f4f4f;
   text-decoration: none;
-}
-h1 {
-  font-family: 'Cedarville Cursive', cursive;
-  font-weight: normal;
-  font-size: 32px;
-  color: #90817e;
-}
-h2 {
-  font-family: 'Cedarville Cursive', cursive;
-  font-weight: bold;
-  font-size: 24px;
-  color: #175682;
 }
 .content {
   text-align: center;
@@ -37,6 +25,9 @@ h2 {
   margin-bottom: 30px;
   background-color: #fff;
   padding: 40px 0px 40px 0px;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
 }
 .tombstone {
   text-align: center;
@@ -59,14 +50,14 @@ li {
 }
 .rsvp_container {
   position: fixed;
-  width: 400px;
+  float: left;
   top: 250px;
   right: 30px;
-  padding: 0px 40px 40px 40px;
+  padding: 40px 100px 40px 50px;
   background-color: #fff;
-  -moz-box-shadow: -3px 3px 10px rgba(0,53,109,0.30);
-  -webkit-box-shadow: -3px 3px 10px rgba(0,53,109,0.30);
-  box-shadow: -3px 3px 10px rgba(0,53,109,0.30);
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
 }
 .image {
   padding-top: 20px;
