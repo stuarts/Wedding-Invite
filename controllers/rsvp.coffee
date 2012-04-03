@@ -107,7 +107,9 @@ module.exports = (Controller, RSVP) ->
 
     create: (req, res) =>
       try
-        rsvp = new RSVP(req.body.rsvp).map().validate()
+        rsvp = new RSVP(req.body.rsvp)
+        rsvp.map()
+        rsvp.validate()
         rsvp.setId rsvp.params.email
         rsvp.save (err)->
           if err?

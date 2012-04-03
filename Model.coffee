@@ -30,9 +30,6 @@ class Model
   @ValidationError = ValidationError
   constructor: (@name, params={})->
     @key = define @name
-    @required "id"
-    if not params.id?
-      params.id = 'find_out'
     @set params
 
   mapping: (@maps) ->
@@ -46,7 +43,8 @@ class Model
     @params = @params ? {}
     for param, allowance of @definitions
       value = params[param]
-      value = parseFloat(value) if not isNaN value
+      value = null if value is ""
+      value = parseFloat(value) unless isNaN parseFloat value
       value = true if value == "true"
       value = false if value == "false"
       @params[param] = value
@@ -117,7 +115,6 @@ class Model
     client.zrem @key('index'), @params.id
 
   updateId: (id) ->
-    console.log 'here', hash
     sha_id = hash id
     console.log 'after hash'
     if sha_id isnt @params.id
@@ -135,7 +132,7 @@ class Model
       multi.exec (err, replies) =>
         cb(err) if cb?
 
-    if @params.id is 'find_out'
+    if not @params.id?
       client.incr @key("next.id"), (err, next_id) =>
         console.log next_id, 'next_id'
         @params.id = next_id
