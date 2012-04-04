@@ -59,6 +59,23 @@ li {
   -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
 }
+.button {
+  border-radius: 1em 1em 1em 1em;
+  border: solid 2px #00b7ff;
+  color: #4f4f4f;
+  background-color: #fff;
+  font-size: 13px;
+  padding: 0.2em 1em 0.275em;
+  text-align: center;
+  display: inline-block;
+  zoom: 1;
+  vertical-align: baseline;
+  margin: 0 2px;
+  cursor: pointer;
+}
+.button:hover {
+  border: solid 2px #8cdeff;
+}
 .image {
   padding-top: 20px;
 }
