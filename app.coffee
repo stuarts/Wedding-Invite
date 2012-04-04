@@ -21,12 +21,7 @@ app = module.exports = express.createServer()
 client = null
 
 # Configuration
-if process.env.REDISTOGO_URL?
-  redisUrl = url.parse(process.env.REDISTOGO_URL)
-  client = redis.createClient redisUrl.port, redisUrl.hostname
-  client.auth redisUrl.auth.split(":")[1]
-else
-  client = redis.createClient()
+client = redis.createClient()
 
 client.on "error", (err) ->
     console.log ("Error " + err)
@@ -65,5 +60,9 @@ application_controller.linkModelsControllers models, controllers
 
 routes = require('./routes') app, application_controller.controllers
 
-app.listen process.env.PORT || 9000
+app.listen if "production" is process.env.NODE_ENV
+             80
+           else
+             9000
+
 console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env

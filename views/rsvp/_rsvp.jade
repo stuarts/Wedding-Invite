@@ -11,14 +11,14 @@
       input(type='text', name="rsvp[email]", size=30, value=rsvp.email)#email
     p
       input(type='checkbox', name="rsvp[picnic]", checked=rsvp.picnic)#picnic
-      |  
+      | 
       label(for="after_party") I'll be at the picnic
     .party
       p
         input(type='checkbox', name="rsvp[after_party]", checked=rsvp.after_party)#after_party
-        |  
+        | 
         label(for="after_party") I'll be at the after party
       p(class=validation('group_size'))
-        label(for="group_size") How many?  
+        label(for="group_size") How many?
         input(type="number", name="rsvp[group_size]", size = 2, maxlength=2, min=1, value=rsvp.group_size)#group_size
     input(type="submit", value="Yay!")#rsvp_submit

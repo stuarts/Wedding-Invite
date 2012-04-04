@@ -1,21 +1,28 @@
 {
-    "name": "stuart_and_brynn's_wedding_invite"
-  , "version": "0.0.1"
-  , "private": true
-  , "engines": {
-	  "node": "0.6.x"
-	  , "npm": "1.1.x"
-  }
-  , "dependencies": {
-      "express": "*"
-    , "stylus": "*"
-    , "jade": "*"
-		, "coffee-script": "*"
-		, "express-coffee": "*"
-		, "express-resource": "https://github.com/stuarts/express-resource/tarball/master"
-		, "redis": "*"
-		, 'mailer': "*"
-		, "connect-redis":"*"
-		, "supervisor": "*"
+  "author": "stuarts <stredarts@gmail.com>",
+  "name": "wedding_invite",
+  "description": "A rsvp website for my wedding",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stuarts/Wedding-Invite.git"
+  },
+  "main": "app.coffee",
+	"dependencies": {
+		"coffee-script":"*",
+		"connect-redis":"*",
+		"express":"*",
+		"express-coffee":"*",
+		"express-resource":"https://github.com/stuarts/express-resource/tarball/master",
+		"jade":"*",
+		"mailer":"*",
+		"redis":"*",
+		"stylus":"*",
+		"supervisor":"*"
+	},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
   }
 }
