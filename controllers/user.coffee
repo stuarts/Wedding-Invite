@@ -9,8 +9,10 @@ module.exports = (Controller, User) ->
         {email, passphrase} = req.body.user
         User.authorize email, passphrase, (err, user) ->
           if not err?
-            req.session.authorized = true
-            res.redirect "/users/#{user.params.id}"
+            req.session.user_id = user.params.id
+            user.getIsAdmin (err, isAdmin) ->
+              req.session.authorized = isAdmin
+              res.redirect "/users/#{user.params.id}"
           else if err instanceof User.ValidationError
             req.session.user = req.body.user
             req.session.validation_errors = err.unmet_reqs
@@ -42,8 +44,10 @@ module.exports = (Controller, User) ->
       User.create email, passphrase, (err, user) ->
         if not err?
           user.save (err)->
-          req.session.authorized = true
-          res.redirect "/users/#{user.params.id}"
+          req.session.user_id = user.params.id
+          user.getIsAdmin (err, isAdmin) ->
+            req.session.authorized = isAdmin
+            res.redirect "/users/#{user.params.id}"
         else if err instanceof User.ValidationError
           req.session.user = req.body.user
           req.session.validation_errors = err.unmet_reqs

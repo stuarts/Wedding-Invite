@@ -40,6 +40,7 @@ module.exports = (Controller, RSVP) ->
     constructor:() ->
 
     index: (req, res) =>
+      console.log req.session.authorized
       if req.session.authorized
         RSVP.all (rsvps) ->
           picnic_total = 0

@@ -22,6 +22,7 @@ class ValidationError extends Error
   constructor:(@unmet_reqs) ->
 
 class Model
+  @define: define
   @Map =
     checked: (val) -> val == 'on'
     number: (val) -> Number(val)
@@ -84,6 +85,7 @@ class Model
       @definitions[param] = 'require'
 
   defineModels:(models, _client) ->
+    Model.client = _client
     client = _client
     @models = models
     for key, definition of models
