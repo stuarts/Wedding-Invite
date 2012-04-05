@@ -5,14 +5,21 @@ module.exports = class Controller
   constructor:(controllers) ->
     @controllers = {}
 
+  @validation: (req) ->
+    validation_errors = req.session.validation_errors ? []
+    delete req.session.validation_errors
+    (name) -> 'needs_validation' if name in validation_errors
+
   linkModelsControllers: (models, controllers) ->
     for key, factory of controllers
       Model = models[key]
       Child = factory(Controller, Model)
       controller = new Child
+      controller.name = key
       load = @load
-      controller.load = (id, fn) ->
-        (load).call(controller, id, fn)
+      controller.load = do (controller) ->
+        (id, fn) -> 
+          (load).call(controller, id, fn)
       @controllers[key] = controller
 
     for key, model of models

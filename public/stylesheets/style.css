@@ -10,6 +10,20 @@ input,
 textarea {
   font: 14px "Courier", Arial, sans-serif;
 }
+table {
+  border-collapse: collapse;
+}
+thead {
+  text-align: left;
+  border-bottom: 1px solid #000;
+}
+tbody tr:nth-child(2n) {
+  background: #eef5ff;
+}
+td,
+th {
+  padding: 1em;
+}
 a {
   color: #4f4f4f;
   text-decoration: none;
@@ -48,10 +62,65 @@ li {
 .needs_validation {
   background: #f5d0cb;
 }
+.rsvp .input_label {
+  width: 4em;
+  margin-right: 0.5em;
+  display: inline-block;
+}
+.user {
+  position: fixed;
+  left: 50%;
+  margin-left: -146px;
+  position: fixed;
+  top: 50%;
+  margin-top: -114.5px;
+  float: left;
+  padding: 40px 60px 60px 60px;
+  background-color: #fff;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
+.rsvp_search {
+  position: fixed;
+  left: 50%;
+  margin-left: -146px;
+  position: fixed;
+  top: 50%;
+  margin-top: -114.5px;
+  float: left;
+  padding: 40px 60px 60px 60px;
+  background-color: #fff;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
+.rsvp_edit {
+  position: fixed;
+  left: 50%;
+  margin-left: -190px;
+  position: fixed;
+  top: 50%;
+  margin-top: -170px;
+  float: left;
+  padding: 40px 60px 60px 60px;
+  background-color: #fff;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
+.rsvp_index {
+  margin: 100px 50px;
+  padding: 40px 60px 60px 60px;
+  background-color: #fff;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
 .rsvp_container {
   position: fixed;
-  float: left;
-  top: 250px;
+  top: 50%;
+  margin-top: -189.5px;
   right: 30px;
   padding: 40px 100px 40px 50px;
   background-color: #fff;
@@ -76,11 +145,13 @@ li {
 .button:hover {
   border: solid 2px #8cdeff;
 }
+.cancel {
+  border: solid 2px #a11;
+  float: right;
+}
+.cancel:hover {
+  border: solid 2px #f38a8a;
+}
 .image {
   padding-top: 20px;
-}
-.image iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
 }

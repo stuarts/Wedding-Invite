@@ -35,24 +35,40 @@ module.exports = (Controller, RSVP) ->
         , (err, result)->
           console.log err if err?
 
+  {validation} = Controller
   class RSVPController extends Controller
     constructor:() ->
 
     index: (req, res) =>
-      RSVP.all (rsvps) ->
-        res.render 'rsvp/index',
-          title: "RSVP"
-          rsvps: rsvps
+      if req.session.authorized
+        RSVP.all (rsvps) ->
+          picnic_total = 0
+          party_total = 0
+          for rsvp in rsvps
+            group_size = Number rsvp.group_size
+            continue if isNaN group_size
+            if rsvp.picnic == 'true'
+              picnic_total += group_size
+            if rsvp.after_party == 'true'
+              party_total += group_size
+
+          console.log rsvps
+          res.render 'rsvp/index',
+            title: "RSVP"
+            rsvps: rsvps
+            picnic_total: picnic_total
+            party_total: party_total
+      else
+        res.redirect '/'
 
     search: (req, res) =>
-      console.log 'atsearch'
       err = null
       if req.body?.email?
         RSVP.searchById req.body.email, (err, rsvp)->
           if not err? && rsvp?.params?.email == req.body.email
             res.redirect "/rsvps/#{rsvp.params.id}/edit"
           else
-            req.flash 'info', "Could not find #{req.body.email}"
+            req.flash 'info', "Umm, we don't have a reservation for any \"#{req.body.email}\"."
             res.redirect 'back'
       else
         res.render 'rsvp/search'
@@ -60,30 +76,19 @@ module.exports = (Controller, RSVP) ->
           err: req.flash 'info'
 
     new: (req, res) ->
-      layout = req.format isnt "ajax"
-      validation_errors = req.session.validation_errors ? []
-      validation = (name) ->
-        if name in validation_errors
-          'needs_validation'
       rsvp =  req.body.rsvp ? req.session.rsvp ? group_size : 1
       delete req.session.rsvp
-      delete req.session.validation_errors
       res.render "rsvp/new",
-        validation: validation
+        validation: validation(req)
         method: 'post'
         title: "RSVP"
-        layout: layout
         rsvp: rsvp
 
     edit: (req, res) =>
-      validation_errors = req.session.validation_errors ? []
-      validation = (name) ->
-        if name in validation_errors
-          'needs_validation'
-      console.log req.rsvp.params
+      console.log req.rsvp
       res.render 'rsvp/edit',
         title: "Edit My RSVP"
-        validation: validation
+        validation: validation(req)
         method: 'put'
         rsvp: req.rsvp.params
 
@@ -91,7 +96,6 @@ module.exports = (Controller, RSVP) ->
       try
         rsvp = new RSVP(req.body.rsvp).map().validate()
         rsvp.updateId rsvp.params.email
-        console.log 'updated id'
         rsvp.save (err)->
           if err?
             throw err
@@ -123,4 +127,11 @@ module.exports = (Controller, RSVP) ->
           req.session.rsvp = req.body.rsvp
           req.session.validation_errors = e.unmet_reqs
           res.redirect 'back'
+        else
+          throw e
 
+    destroy: (req, res) ->
+      if req.session.rsvp_id == req.body.rsvp.id
+        delete req.session.rsvp_id
+      new RSVP(req.body.rsvp).destroy()
+      res.redirect '/rsvps'

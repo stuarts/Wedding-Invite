@@ -38,11 +38,11 @@
 		div(class="image")
 			img(src="/images/frankenbride.jpg")
 			p We hope you can be a part of our special day...
-.rsvp_container
+.rsvp_container.cent_vert
 	if rsvp_id
-		p Thanks for replying! Change your rsvp 
-			a(href='/rsvps/#{rsvp_id}/edit') here
-			| .
+		p Thanks for replying! Change your rsvp
+			a(href='/rsvps/#{rsvp_id}/edit')
+				|  here.
 	else
 		img(src="/images/rsvp.png")
 		!= partial('rsvp/rsvp', rsvp)
