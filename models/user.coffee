@@ -1,6 +1,6 @@
 
 module.exports = (name, Model) ->
-  {hash} = Model
+  {hash, client, define} = Model
   class User extends Model
     constructor:(params) ->
       @name = name
@@ -45,12 +45,15 @@ module.exports = (name, Model) ->
         else
           cb new User.ValidationError ['email']
 
+
+    getIsAdmin:(cb) ->
+      client.sismember "admin", @params.id, (err, res) ->
+        console.log res, !!(+res)
+        cb(err, !!(+res))
+
     @get_perm_token:(username, passphrase, salt) ->
       last = 'start'
       for i in [0..5]
         last = hash username+passphrase+salt+last
       last
-
-
-
 
