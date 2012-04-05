@@ -36,11 +36,9 @@ jQuery(document).ready ->
   cent_vert = ($ el for el in $ '.cent_vert')
   cent_horz = ($ el for el in $ '.cent_horz')
   for el in cent_vert
-    el.css 'height', el.height()
     position el, vert()
 
   for el in cent_horz
-    el.css 'width', el.width()
     position el, horz()
 
   $(window).resize ->
