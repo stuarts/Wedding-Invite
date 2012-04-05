@@ -1,11 +1,9 @@
-h1 Search
-
-if err
-  p.error= err
-.rsvp_search
+.rsvp_search.cent_vert.cent_horz
+  if err
+    p.error= err
   form(action="/rsvps/search", method="post").rsvp_search_form
-    label(for='email') Enter your email: 
-    br
-    input(type='text', name='email', value="", autofocus).email_search_field
-    br
-    input(type='submit', name='submit', value='Search').button
+    p
+      label(for='email') Enter your email:
+    p
+      input(type='text', name='email', value="", autofocus).email_search_field
+      input(type='submit', name='submit', value='Search').button

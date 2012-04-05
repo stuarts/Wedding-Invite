@@ -1,11 +1,25 @@
-h1= title
-p Welcome to #{title}
-ul
-  each rsvp in rsvps
-    li
-      p name: #{rsvp.name}
-      p email: #{rsvp.email}
-      p party: #{rsvp.after_party}
-      p number: #{rsvp.group_size}
+.rsvp_index
+  h1= title
+  p Welcome to #{title}
+  table(width="100%")
+    thead
+      tr
+        th Name
+        th Email
+        th Picnic (#{picnic_total})
+        th Party (#{party_total})
+        th #
+        th actions
+    tbody
+      each rsvp in rsvps
+        tr
+          td #{rsvp.name}
+          td #{rsvp.email}
+          td #{rsvp.picnic}
+          td #{rsvp.after_party}
+          td #{rsvp.group_size}
+          td 
+            a(href="/rsvps/#{rsvp.id}/edit") Edit
+
 
 

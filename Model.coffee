@@ -30,6 +30,7 @@ class Model
   @ValidationError = ValidationError
   constructor: (@name, params={})->
     @key = define @name
+    @allowed 'id'
     @set params
 
   mapping: (@maps) ->
@@ -44,7 +45,7 @@ class Model
     for param, allowance of @definitions
       value = params[param]
       value = null if value is ""
-      value = parseFloat(value) unless isNaN parseFloat value
+      value = Number(value) unless not value? or isNaN Number value
       value = true if value == "true"
       value = false if value == "false"
       @params[param] = value
@@ -88,53 +89,58 @@ class Model
     for key, definition of models
       @models[key] = definition key, Model if definition != Model
       model = define key
-      static @models[key],
-        all: (cb) ->
-          client.zrange model('index'), 0, -1, (err, ids) ->
-            if ids?
-              multi = client.multi()
-              for id in ids
-                multi.hgetall model(id)
-              multi.exec (err, replies) ->
-                cb replies
-            else
-              cb []
+      def = @models[key]
+      do (def, model) ->
+        static def,
+          all: (cb) ->
+            client.zrange model('index'), 0, -1, (err, ids) ->
+              if ids?
+                multi = client.multi()
+                for id in ids
+                  multi.hgetall model(id)
+                multi.exec (err, replies) ->
+                  cb replies
+              else
+                cb []
 
-        searchById: (id, cb) ->
-          @get hash(id), cb
+          searchById: (id, cb) ->
+            @get hash(id), cb
 
-        get: (id, cb) ->
-          client.hgetall model(id), (err, model_params) ->
-            cb err, new models[key] (model_params)
+          get: (id, cb) ->
+            client.hgetall model(id), (err, model_params) ->
+              cb err, new def (model_params)
 
-        ValidationError: ValidationError
+          ValidationError: ValidationError
 
 
   destroy: () ->
     client.del @key(@params.id)
     client.zrem @key('index'), @params.id
 
+  @hash: hash
+
   updateId: (id) ->
-    sha_id = hash id
-    console.log 'after hash'
+    sha_id = hash id.toString()
     if sha_id isnt @params.id
       @destroy()
       @params.id = sha_id
 
   setId: (id) ->
-    @params.id = hash id
+    @params.id = hash id.toString()
 
   save:(cb) ->
     save = () =>
+      console.log 'save'
       multi = client.multi()
       multi.hmset @key(@params.id), @params
       multi.zadd @key("index"), Date.now(), @params.id
       multi.exec (err, replies) =>
+        console.log 'rep'
         cb(err) if cb?
+
 
     if not @params.id?
       client.incr @key("next.id"), (err, next_id) =>
-        console.log next_id, 'next_id'
         @params.id = next_id
         throw err if err
         save()

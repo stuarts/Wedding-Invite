@@ -1,90 +1,145 @@
 opacity(n)
 	opacity: n
-	
+
 shadow()
-	-moz-box-shadow: arguments;
-	-webkit-box-shadow: arguments;
-	box-shadow: arguments;
-	
-	
+	-moz-box-shadow: arguments
+	-webkit-box-shadow: arguments
+	box-shadow: arguments
+
+center_vert(height)
+	position: fixed
+	top: 50%
+	margin-top: -(height/2px)
+
+
+center_horz(width)
+	position: fixed
+	left: 50%
+	margin-left: -(width/2px)
+
 body
-	font: 13px "Courier", Helvetica, Arial, sans-serif;
-	color: gray;
-	background: url(/images/tissuepaper.jpg);
+	font: 13px "Courier", Helvetica, Arial, sans-serif
+	color: gray
+	background: url(/images/tissuepaper.jpg)
 
 table, th, td, input, textarea
-	font: 14px "Courier", Arial, sans-serif;
+	font: 14px "Courier", Arial, sans-serif
+
+table
+	border-collapse: collapse
+
+thead
+	text-align: left
+	border-bottom: 1px solid black
+tbody tr
+	&:nth-child(2n)
+		background: lighten(#acf, 80%)
+
+
+td, th
+	padding: 1em
 
 a
-	color: #4f4f4f;
-	text-decoration: none;
+	color: #4f4f4f
+	text-decoration: none
 
 .content
-	text-align: center;
+	text-align: center
 	margin-right: 480px
-	
-	
+
+
 .info
 	width: 800px
 	margin: auto
-	margin-top: 30px;
-	margin-bottom: 30px;
-	background-color: #ffffff;
-	padding: 40px 0px 40px 0px;
-	shadow: 0px 0px 10px rgba(144,129,126, .5);
-	
+	margin-top: 30px
+	margin-bottom: 30px
+	background-color: #ffffff
+	padding: 40px 0px 40px 0px
+	shadow: 0px 0px 10px rgba(144,129,126, .5)
 
 .tombstone
-	text-align: center;
-	list-style: none;
+	text-align: center
+	list-style: none
 
 #group_size
 	width: 3em
-	
+
 ul
 	list-style-position: outside
-	padding: 0px;
-	
+	padding: 0px
+
 li
-	font: 12px "Courier", Arial, sans-serif;
-	color: #999999; 
-	list-style: none;
+	font: 12px "Courier", Arial, sans-serif
+	color: #999999
+	list-style: none
 
 .needs_validation
 	background: #F5D0CB
 
+.rsvp .input_label
+	width: 4em
+	margin-right: .5em
+	display: inline-block
+
+center_container(width, height)
+	center_horz: width
+	center_vert: height
+	float: left
+	padding: 40px 60px 60px 60px
+	background-color: #ffffff
+	shadow: 0px 0px 10px rgba(144,129,126, .5)
+	
+.user
+	center_container(292, 229)
+
+.rsvp_search
+	center_container(292, 229)
+
+.rsvp_edit
+	center_container(380, 340)
+
+.rsvp_index
+	margin: 100px 50px
+	padding: 40px 60px 60px 60px
+	background-color: #ffffff
+	shadow: 0px 0px 10px rgba(144,129,126, .5)
+
+
 
 .rsvp_container
-	position: fixed;
-	float: left;
-	top: 250px
+	center_vert: 379px
 	right: 30px
-	padding: 40px 100px 40px 50px;
-	background-color: #ffffff;
-	shadow: 0px 0px 10px rgba(144,129,126, .5);
-	
+	padding: 40px 100px 40px 50px
+	background-color: #ffffff
+	shadow: 0px 0px 10px rgba(144,129,126, .5)
+
 .button
-	border-radius: 1em 1em 1em 1em;
-	border: solid 2px #00b7ff;
-	color: #4f4f4f;
-	background-color: #ffffff;
-	font-size: 13px;
-	padding: .2em 1em .275em;
-	text-align: center;
-	display: inline-block;
-	zoom: 1;
-	vertical-align: baseline;
-	margin: 0 2px;
-	cursor: pointer;
-	
+	border-radius: 1em 1em 1em 1em
+	border: solid 2px #00b7ff
+	color: #4f4f4f
+	background-color: #ffffff
+	font-size: 13px
+	padding: .2em 1em .275em
+	text-align: center
+	display: inline-block
+	zoom: 1
+	vertical-align: baseline
+	margin: 0 2px
+	cursor: pointer
+
 .button:hover
-	border: solid 2px #8cdeff;
-	
+	border: solid 2px #8cdeff
+
+our_red = #AA1111
+
+
+.cancel
+	border: solid 2px our_red
+	float: right
+
+	&:hover
+		border: solid 2px lighten(our_red, 60%)
+
 
 .image
-	padding-top: 20px;
-	
-	iframe
-		width: 100%
-		height: 100%
-		border: none
+	padding-top: 20px

@@ -1,0 +1,14 @@
+.user.cent_horz.cent_vert
+  h1= title
+  if validation('email')
+    p Don't have that email.
+  if validation('passphrase')
+    p Please enter a passphrase.
+  form(action="/users/login", method="post")
+    p(class=validation('email'))
+      label(for="email").input_label Email:
+      input(type='text', name="user[email]", size=30, value=email)#email
+    p(class=validation('passphrase'))
+      label(for="passphrase").input_label Passphrase:
+      input(type='text', name="user[passphrase]", size=30, value='')#passphrase
+    button(name='_method', value="post").button Sign Up.
