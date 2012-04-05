@@ -64,12 +64,10 @@
     })();
     for (_i = 0, _len = cent_vert.length; _i < _len; _i++) {
       el = cent_vert[_i];
-      el.css('height', el.height());
       position(el, vert());
     }
     for (_j = 0, _len2 = cent_horz.length; _j < _len2; _j++) {
       el = cent_horz[_j];
-      el.css('width', el.width());
       position(el, horz());
     }
     return $(window).resize(function() {
