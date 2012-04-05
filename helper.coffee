@@ -6,7 +6,7 @@ exports.reqdir = (include_path) ->
   files = fs.readdirSync path.resolve include_path
   for file in files when /\.js|\.coffee/.test file
     file_name = file.replace /\.js|\.coffee/, ""
-    file_path = path.resolve include_path, file_name
+    file_path = path.resolve __dirname, include_path, file_name
     namespace[file_name] = require file_path
   namespace
 
