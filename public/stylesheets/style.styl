@@ -115,7 +115,7 @@ center_container(width, height)
 
 .button
 	border-radius: 1em 1em 1em 1em
-	border: solid 2px #00b7ff
+	border: solid 3px #00b7ff
 	color: #4f4f4f
 	background-color: #ffffff
 	font-size: 13px
@@ -126,19 +126,19 @@ center_container(width, height)
 	vertical-align: baseline
 	margin: 0 2px
 	cursor: pointer
+  
+	&:hover
+		border: solid 3px lighten(#00b7ff, 60%)
 
-.button:hover
-	border: solid 2px #8cdeff
-
-our_red = #AA1111
+our_red = #ec0f2d
 
 
 .cancel
-	border: solid 2px our_red
+	border: solid 3px our_red
 	float: right
 
 	&:hover
-		border: solid 2px lighten(our_red, 60%)
+		border: solid 3px lighten(our_red, 60%)
 
 
 .image

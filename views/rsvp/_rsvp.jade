@@ -19,10 +19,10 @@
         label(for="group_size", style="margin-right:.5em") How many?
         input(type="number", name="rsvp[group_size]", size = 2, maxlength=2, min=1, value=rsvp.group_size)#group_size
     if method == 'put'
-      button(name='_method', value=method).button Confirm Edit.
+      button(name='_method', value=method).button Confirm Edit
     else
       button(name='_method', value=method).button Yay!
 
     if rsvp.id
-      button(name="_method", value='delete').button.cancel Cancel RSVP
+      button(name="_method", value='delete').button.cancel Delete Your RSVP
 

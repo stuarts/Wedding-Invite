@@ -130,7 +130,7 @@ li {
 }
 .button {
   border-radius: 1em 1em 1em 1em;
-  border: solid 2px #00b7ff;
+  border: solid 3px #00b7ff;
   color: #4f4f4f;
   background-color: #fff;
   font-size: 13px;
@@ -143,14 +143,14 @@ li {
   cursor: pointer;
 }
 .button:hover {
-  border: solid 2px #8cdeff;
+  border: solid 3px #99e2ff;
 }
 .cancel {
-  border: solid 2px #a11;
+  border: solid 3px #ec0f2d;
   float: right;
 }
 .cancel:hover {
-  border: solid 2px #f38a8a;
+  border: solid 3px #f99eaa;
 }
 .image {
   padding-top: 20px;
