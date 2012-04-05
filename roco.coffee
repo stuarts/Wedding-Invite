@@ -1,6 +1,7 @@
 set 'hosts', ['deploy@ec2-72-44-63-240.compute-1.amazonaws.com']
 set 'repository', ['git://github.com/stuarts/Wedding-Invite.git']
-set 'engine', []
+set 'engine', '/usr/local/bin/coffee'
+set 'nodeEntry', 'app.coffee'
 set 'appPort', 80
 
 namespace 'deploy', ->
@@ -11,7 +12,7 @@ namespace 'deploy', ->
 namespace 'npm', ->
   task 'install:coffee', (done)->
     run """
-    npm install coffee-script -g
+    sudo npm install coffee-script -g
     """
     , done
 
