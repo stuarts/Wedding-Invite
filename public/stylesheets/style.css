@@ -116,6 +116,7 @@ li {
   -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  overflow: auto;
 }
 .rsvp_container {
   position: fixed;
