@@ -33,7 +33,10 @@ app.configure ->
   app.set 'views', __dirname + '/views'
   app.set 'view engine', 'jade'
   app.use express.cookieParser()
-  app.use express.session secret: "brynn and me walking down a beach", store: new RedisStore( client:client )
+  app.use express.session
+    secret: "brynn and me walking down a beach",
+    store: new RedisStore( client:client )
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 108 }
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use require('stylus').middleware src: __dirname + '/public'
