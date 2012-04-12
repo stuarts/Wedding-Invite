@@ -88,7 +88,6 @@ class Model
     Model.client = _client
     client = _client
     @models = models
-    Model.models = models
 
     for key, definition of models
       @models[key] = definition key, Model if definition != Model

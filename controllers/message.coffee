@@ -18,30 +18,50 @@ async = () ->
   done:(callback) ->
     doneCallback = callback
 
-module.exports = (Controller, Message) ->
+module.exports = (Controller, Message, models) ->
   {validation} = Controller
+  RSVP = models.rsvp
   class MessageController extends Controller
     constructor:() ->
 
     index: (req, res) ->
       {II, done} = async()
       Message.all II 'messages'
-      Message.models.RSVP.get req.session.rsvp_id, II 'rsvp' if req.session.rsvp_id?
+      RSVP.get req.session.rsvp_id, II 'rsvp' if req.session.rsvp_id?
       done (results)->
         { rsvp, messages } = results
-        console.log messages
         res.render 'wall/index',
           title: "Message Wall"
-          name: rsvp?[1].name
+          name: rsvp?[1]?.params?.name
           messages: messages[0]
 
-    create: (req, res) ->
+    create: (req, res) =>
       try
-        rsvp = new Message(req.body.message).map().validate()
-        rsvp.save (err)->
+        message = new Message(req.body.message).map().validate()
+
+        {II, done} = async()
+        save_done = II 'save'
+        message.save (err)->
           throw err if err?
           res.redirect "/wall"
-          #sendBackupMail rsvp
+          save_done()
+        RSVP.get req.session.rsvp_id, II 'rsvp' if req.session.rsvp_id?
+
+        done (results)=>
+          rsvp = results.rsvp?[1]
+          console.log @
+          @mail "stredarts@gmail.com, brynntownsend@gmail.com"
+          , "New wedding message from #{message.params.name}"
+          , """
+            Hey Brynn & Stuart,
+
+            You've got a message from: #{rsvp?.params?.email}
+
+            They said:
+
+            #{message.params.text}
+            """
+
       catch e
         if e instanceof RSVP.ValidationError
           req.session.message = req.body.message

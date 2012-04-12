@@ -109,7 +109,8 @@ li {
   -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
 }
-.rsvp_index {
+.rsvp_index,
+.wall {
   margin: 100px 50px;
   padding: 40px 60px 60px 60px;
   background-color: #fff;
@@ -155,4 +156,32 @@ li {
 }
 .image {
   padding-top: 20px;
+}
+.wall {
+  padding: 40px 60px 60px 60px;
+  width: 600px;
+  background-color: #fff;
+  -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+  box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
+.message {
+  overflow: auto;
+/*
+	&:nth-child(1)
+		border-top: 1px solid #DDD
+		*/
+}
+.message:nth-child(2n) {
+  background: #eef5ff;
+}
+.message li {
+  float: left;
+}
+.message .message_name {
+  width: 120px;
+  font-weight: bold;
+}
+.message .message_text {
+  width: 480px;
 }

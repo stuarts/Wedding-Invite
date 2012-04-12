@@ -16,7 +16,7 @@ datetime =-> new Date().toString().replace /\s|:|GMT.*/g, "_"
 
 call = (fn, options) -> if options.if? then fn options.if else null
 
-gpg = (options={}, cb) ->
+crypto = (options={}, cb) ->
   sourceStream = options.sourceStream ? call createReadStream, if: options.source
   destStream = options.destStream ? call createWriteStream, if: options.dest
 
@@ -39,11 +39,11 @@ gpg = (options={}, cb) ->
 
 encrypt = (options={})->
   options.arguments = [ '-c' ]
-  gpg options
+  crypto options
 
 decrypt = (options={})->
   options.arguments = [ '--decrypt' ]
-  gpg options
+  crypto options
 
 
 copy =(done)->

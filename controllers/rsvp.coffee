@@ -1,40 +1,5 @@
-email = require 'mailer'
 
 module.exports = (Controller, RSVP) ->
-  sendBackupMail= (new_rsvp) ->
-
-    RSVP.all (rsvps) ->
-      body =  """
-              Stuart,
-
-              You have a new rsvp.
-
-              New rsvp.
-              #{JSON.stringify new_rsvp.params}
-
-              Total rsvps: #{rsvps.length}
-              #{JSON.stringify rsvps}
-              ==================================
-                -- Heroku App.
-              """
-
-      sgusername = process.env.SENDGRID_USERNAME
-      sgpassword = process.env.SENDGRID_PASSWORD
-      if sgusername? and sgpassword?
-        email.send
-            host : "smtp.sendgrid.net"
-            port : "587"
-            domain : "brynnstuartwedwith.us"
-            to : "stredarts@gmail.com"
-            from : "app@brynnstuartwedwith.us"
-            subject : "Auto backup from your weding site"
-            body: body
-            authentication : "login"
-            username : sgusername
-            password : sgpassword
-        , (err, result)->
-          console.log err if err?
-
   {validation} = Controller
   class RSVPController extends Controller
     constructor:() ->
@@ -103,7 +68,7 @@ module.exports = (Controller, RSVP) ->
           else
             req.session.rsvp_id = rsvp.params.id
             res.redirect "/"
-            sendBackupMail rsvp
+            @sendBackupMail rsvp
       catch e
         if e instanceof RSVP.ValidationError
           req.session.rsvp = req.body.rsvp
@@ -116,13 +81,13 @@ module.exports = (Controller, RSVP) ->
         rsvp.map()
         rsvp.validate()
         rsvp.setId rsvp.params.email
-        rsvp.save (err)->
+        rsvp.save (err)=>
           if err?
             throw err
           else
             req.session.rsvp_id = rsvp.params.id
             res.redirect "/"
-            sendBackupMail rsvp
+            @sendBackupMail rsvp
       catch e
         if e instanceof RSVP.ValidationError
           req.session.rsvp = req.body.rsvp
@@ -136,3 +101,17 @@ module.exports = (Controller, RSVP) ->
         delete req.session.rsvp_id
       new RSVP(req.body.rsvp).destroy()
       res.redirect '/rsvps'
+    sendBackupMail: (new_rsvp) ->
+      to= "stredarts@gmail.com, brynntownsend@gmail.com"
+      body =  """
+              Brynn & Stuart,
+
+              You have a new rsvp.
+
+              New rsvp.
+              #{JSON.stringify new_rsvp.params}
+              """
+      subject= "Rsvp backup"
+      @mail to, subject, body
+
+

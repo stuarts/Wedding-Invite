@@ -30,7 +30,7 @@
     outerDim = params.outerDim, pad = params.pad, pos_param = params.pos_param, margin_param = params.margin_param, test_param = params.test_param;
     el_dim = el[outerDim]();
     if (el_dim + pad > test_param) {
-      el.css('position', 'absolute');
+      el.css('position', 'fixed');
       el.css(pos_param, "0px");
       return el.css(margin_param, "" + (pad / 2) + "px");
     } else {

@@ -42,6 +42,11 @@
 		p Thanks for replying! Change your rsvp
 			a(href='/rsvps/#{rsvp_id}/edit')
 				|  here.
+		h1 etc.
+		p(style="width:344px") Only street parking is available near Parsons Garden, and may be limited the day of the wedding
+		p(style="width:344px") If you would be interested in organizing a carpool, baking a pie, or have any other questions, please post on our
+			a(href='/wall/')
+				|  wall.
 	else
 		img(src="/images/rsvp.png")
 		!= partial('rsvp/rsvp', rsvp)

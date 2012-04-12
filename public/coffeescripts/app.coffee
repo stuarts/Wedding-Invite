@@ -24,7 +24,7 @@ position = (el, params)->
   el_dim = el[outerDim]()
 
   if el_dim + pad > test_param
-    el.css 'position', 'absolute'
+    el.css 'position', 'fixed'
     el.css pos_param, "0px"
     el.css margin_param, "#{pad/2}px"
   else

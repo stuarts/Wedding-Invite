@@ -1,4 +1,5 @@
 { reqdir } = require "./helper"
+email = require 'mailer'
 
 
 module.exports = class Controller
@@ -13,12 +14,12 @@ module.exports = class Controller
   linkModelsControllers: (models, controllers) ->
     for key, factory of controllers
       Model = models[key]
-      Child = factory(Controller, Model)
+      Child = factory(Controller, Model, models)
       controller = new Child
       controller.name = key
       load = @load
       controller.load = do (controller) ->
-        (id, fn) -> 
+        (id, fn) ->
           (load).call(controller, id, fn)
       @controllers[key] = controller
 
@@ -39,3 +40,22 @@ module.exports = class Controller
   destroy: (req, res) ->
   load: (id, fn) ->
     @model?.get id, fn
+  mail:(to, subject, body) ->
+    sgusername = process.env.SENDGRID_USERNAME
+    sgpassword = process.env.SENDGRID_PASSWORD
+    if sgusername? and sgpassword?
+      email.send
+          host : "smtp.sendgrid.net"
+          port : "587"
+          domain : "brynnstuartwedwith.us"
+          to : to
+          from : "app@brynnstuartwedwith.us"
+          subject : subject
+          body: body
+          authentication : "login"
+          username : sgusername
+          password : sgpassword
+      , (err, result)->
+        console.log err if err?
+
+
