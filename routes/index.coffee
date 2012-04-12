@@ -1,4 +1,12 @@
 module.exports = (app, controllers) ->
+  app.all /.*/, (req, res, next) ->
+    host = req.header 'host'
+    console.log 'hello?', host
+    if host.match /^www\..*/i
+      res.redirect "http://#{host.replace /www\./, ''}", 301
+    else
+      next()
+
   app.get '/wall', controllers.message.index
   app.resource 'messages', controllers.message
   app.resource 'users', controllers.user, (users) ->
