@@ -3,10 +3,12 @@ set 'repository', ['git://github.com/stuarts/Wedding-Invite.git']
 set 'engine', '/usr/local/bin/coffee'
 set 'nodeEntry', 'app.coffee'
 set 'appPort', 80
-set 'env_exports',
-  RSVP_AWS_KEY:    process.env.RSVP_AWS_KEY
-  RSVP_AWS_SECRET: process.env.RSVP_AWS_SECRET
-  RSVP_BACKUP_SECRET: process.env.RSVP_BACKUP_SECRET
+set 'env_vars',
+  RSVP_AWS_KEY:         process.env.RSVP_AWS_KEY
+  RSVP_AWS_SECRET:      process.env.RSVP_AWS_SECRET
+  RSVP_BACKUP_SECRET:   process.env.RSVP_BACKUP_SECRET
+  SENDGRID_USERNAME:    process.env.SENDGRID_USERNAME
+  SENDGRID_PASSWORD:    process.env.SENDGRID_PASSWORD
 
 namespace 'deploy', ->
     # show status of running application
