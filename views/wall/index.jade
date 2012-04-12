@@ -1,0 +1,15 @@
+.wall
+  h1 Message Wall
+  form(action='/messages', method='post')
+    p
+      input(type='text', name='message[name]', value=name).user_name
+    p
+      textarea(name="message[text]").message_txt
+    button(name="_method", value='post').button Post
+
+  ul.messages
+    each message in messages
+      ul.message
+        li.message_name= message.name
+        li.message_text= message.text
+

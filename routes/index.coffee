@@ -1,4 +1,6 @@
 module.exports = (app, controllers) ->
+  app.get '/wall', controllers.message.index
+  app.resource 'messages', controllers.message
   app.resource 'users', controllers.user, (users) ->
     users.get '/login', controllers.user.login
     users.post '/login', controllers.user.login
