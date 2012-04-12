@@ -18,7 +18,9 @@
 		"mailer":"*",
 		"redis":"*",
 		"stylus":"*",
-		"supervisor":"*"
+		"supervisor":"*",
+		"knox":"*",
+		"cron": "https://github.com/ncb000gt/node-cron/tarball/master"
 	},
   "devDependencies": {},
   "optionalDependencies": {},

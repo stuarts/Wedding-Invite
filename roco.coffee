@@ -1,8 +1,12 @@
-set 'hosts', ['deploy@ec2-72-44-63-240.compute-1.amazonaws.com']
+set 'hosts', ['brynnstuartwedwith.us']
 set 'repository', ['git://github.com/stuarts/Wedding-Invite.git']
 set 'engine', '/usr/local/bin/coffee'
 set 'nodeEntry', 'app.coffee'
 set 'appPort', 80
+set 'env_exports',
+  RSVP_AWS_KEY:    process.env.RSVP_AWS_KEY
+  RSVP_AWS_SECRET: process.env.RSVP_AWS_SECRET
+  RSVP_BACKUP_SECRET: process.env.RSVP_BACKUP_SECRET
 
 namespace 'deploy', ->
     # show status of running application

@@ -6,6 +6,8 @@ resource = require 'express-resource'
 redis = require 'redis'
 url = require 'url'
 {reqdir, link_mvc} = require './helper'
+{ cron } = require './backup.cron'
+cron.start()
 
 RedisStore = require('connect-redis')(express)
 
