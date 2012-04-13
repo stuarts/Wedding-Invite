@@ -1,5 +1,5 @@
 .wall
-  h1 Message Wall
+  img(src="/images/messagewall.png")
 
   ul.messages
     each message in messages
@@ -11,7 +11,7 @@
 
   form(action='/messages', method='post')
     p
-      input(type='text', name='message[name]', value=name).user_name
+      input(type='text', name='message[name]', value=name).input_box.user_name
     p
-      textarea(name="message[text]").message_txt
+      textarea.messageinput(name="message[text]").input_box.message_txt
     button(name="_method", value='post').button Post

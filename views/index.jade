@@ -39,16 +39,16 @@
 			p We hope you can be a part of our special day...
 .rsvp_container.cent_vert
 	if rsvp_id
-		p Thanks for replying! Change your rsvp
+		p Thanks for replying! You can change your rsvp
 			a(href='/rsvps/#{rsvp_id}/edit')
-				|  here.
-		h1 etc.
+				|  here
+		img(src="/images/etc.png")
 		p(style="width:344px") Only street parking is available near Parsons Garden, and may be limited the day of the wedding
 		p(style="width:344px") If you would be interested in organizing a carpool, baking a pie, or have any other questions, please post on our
 			a(href='/wall/')
-				|  wall.
+				|  wall
 	else
-		img(src="/images/rsvp.png")
+		img(src="/images/rsvp2.png")
 		!= partial('rsvp/rsvp', rsvp)
 		p
 			a(href='/rsvps/search') Need to change your rsvp?
