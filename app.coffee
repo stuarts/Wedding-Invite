@@ -8,7 +8,7 @@ url = require 'url'
 {reqdir, link_mvc} = require './helper'
 
 { cron } = require './backup.cron'
-cron.start()
+
 
 RedisStore = require('connect-redis')(express)
 
@@ -53,6 +53,7 @@ app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
+  cron.start()
   app.use express.errorHandler()
 
 # Routes
