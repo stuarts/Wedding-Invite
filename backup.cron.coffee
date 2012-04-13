@@ -48,7 +48,7 @@ decrypt = (options={})->
 
 copy =(done)->
   filename = "#{ datetime() }dump.rdb"
-  exec "cp /usr/local/var/db/redis/dump.rdb /tmp/#{filename}", (err, sterr, stout) ->
+  exec "cp /var/lib/redis/6379/dump.rdb /tmp/#{filename}", (err, sterr, stout) ->
     done filename
 
 enc =(filename, done)->
