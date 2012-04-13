@@ -1,14 +1,9 @@
-
-# Module dependencies.
-
 express = require 'express'
 resource = require 'express-resource'
 redis = require 'redis'
 url = require 'url'
 {reqdir, link_mvc} = require './helper'
-
 { cron } = require './backup.cron'
-
 
 RedisStore = require('connect-redis')(express)
 
@@ -18,16 +13,11 @@ Model = require './Model'
 models = reqdir "./models"
 controllers = reqdir "./controllers"
 
-
 app = module.exports = express.createServer()
-
-client = null
 
 # Configuration
 client = redis.createClient()
-
-client.on "error", (err) ->
-    console.log ("Error " + err)
+client.on "error", (err) -> console.log ("Error " + err)
 
 app.configure ->
   app.set 'views', __dirname + '/views'
