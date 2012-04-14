@@ -1,11 +1,9 @@
 module.exports = (app, controllers) ->
   app.all /.*/, (req, res, next) ->
     host = req.header 'host'
-    console.log 'hello?', host
-    if host.match /^www\..*/i
-      res.redirect "http://#{host.replace /www\./, ''}", 301
-    else
-      next()
+    if        /brynnstuartwedwith\.us/    .test host then res.redirect "http://brynnandstuartwedding.info#{req.url}", 301
+    else if   /^www\..*/i                 .test host then res.redirect "http://#{host.replace /www\./, ''}#{req.url}", 301
+    else next()
 
   app.get '/wall', controllers.message.index
   app.resource 'messages', controllers.message
