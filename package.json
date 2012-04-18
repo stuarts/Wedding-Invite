@@ -20,7 +20,8 @@
 		"stylus":"*",
 		"supervisor":"*",
 		"knox":"*",
-		"cron": "*"
+		"cron": "*",
+		"roco": "https://github.com/stuarts/roco/tarball/master"
 	},
   "devDependencies": {},
   "optionalDependencies": {},
