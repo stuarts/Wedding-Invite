@@ -29,11 +29,8 @@ th {
   padding: 1em;
 }
 a {
-  color: #3c3c3c;
+  color: #00b7ff;
   text-decoration: none;
-}
-a:hover {
-  color: #999;
 }
 h1 {
   color: #808080;
@@ -59,6 +56,12 @@ textarea {
   -moz-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   -webkit-box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
   box-shadow: 0px 0px 10px rgba(144,129,126,0.50);
+}
+.info a {
+  color: #4f4f4f;
+}
+.info a:hover {
+  color: #999;
 }
 .tombstone {
   text-align: center;
