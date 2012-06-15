@@ -1,56 +1,62 @@
 
 .content
-	div(class="info")
-		img(src="/images/brynnandstuart.png")
+  div(class="info")
+    img(src="/images/brynnandstuart.png")
 
-		ul(class="tombstone")
-			li We would like our friends and family to join us in celebrating our marriage
+    ul(class="tombstone")
+      li We would like our friends and family to join us in celebrating our marriage
 
-		ul(class="tombstone")
-			li Friday, the twenty-seventh of July
-			li two-thousand and twelve
-			li at two o'clock in the afternoon
+    ul(class="tombstone")
+      li Friday, the twenty-seventh of July
+      li two-thousand and twelve
+      li at two o'clock in the afternoon
 
-		p
-		ul(class="tombstone")
-			li
-				a(href="http://maps.google.com/maps?q=parsons+garden+seattle&um=1&ie=UTF-8&hl=en&sa=N&tab=wl") Parsons Garden
-			li 7th Ave W and W Highland Dr
-			li Seattle, Washington
+    p
+    ul(class="tombstone")
+      li
+        a(href="http://maps.google.com/maps?q=parsons+garden+seattle&um=1&ie=UTF-8&hl=en&sa=N&tab=wl") Parsons Garden
+      li 7th Ave W and W Highland Dr
+      li Seattle, Washington 98119
 
-		img(src="/images/reception.png")
-		ul(class="tombstone")
-			li Picnic reception in the garden to follow the ceremony
-			li There will be snacks, pie and icecream, and quilts for lounging on the lawn
-			li Please dress accordingly
+    img(src="/images/reception.png")
+    ul(class="tombstone")
+      li Picnic reception in the garden to follow the ceremony
+      li There will be snacks, pie and icecream, and quilts for lounging on the lawn
+      li Please dress accordingly
 
-		img(src="/images/afterparty.png")
-		ul(class="tombstone")
-			li As no alcohol is permitted at the park, there will be an afterparty for boozing and dancing
-			p
-			li Location TBD
+    img(src="/images/afterparty.png")
+    ul(class="tombstone")
+      li As no alcohol is permitted at the park, there will be an afterparty at our apartment,
+      li seven blocks southeast of Parsons Garden,
+      li from eight o'clock to midnight
+      li Kids welcome!
+      p
+      li 
+        a(href="http://goo.gl/maps/hQtY") Our place
+      li 316 W. Olympic Place Apt 2
+      li Seattle, Washington 98119
 
-		img(src="/images/please.png")
-		ul(class="tombstone")
-			li No gifts!
-			li If you insist, we ask that you donate to our honeymoon instead
-			li Pies are OK!
+    img(src="/images/please.png")
+    ul(class="tombstone")
+      li No gifts!
+      li If you insist, we ask that you donate to our honeymoon instead
+      li Pies are OK!
 
-		div(class="image")
-			img(src="/images/frankenbride.jpg")
-		li We hope you can be a part of our special day...
+    div(class="image")
+      img(src="/images/frankenbride.jpg")
+    li We hope you can be a part of our special day...
 .rsvp_container.cent_vert
-	if rsvp_id
-		p Thanks for replying! You can change your rsvp
-			a(href='/rsvps/#{rsvp_id}/edit')
-				|  here
-		img(src="/images/etc.png")
-		p(style="width:344px") Only street parking is available near Parsons Garden, and may be limited the day of the wedding
-		p(style="width:344px") If you would be interested in organizing a carpool, baking a pie, or have any other questions, please post on our
-			a(href='/wall/')
-				|  wall
-	else
-		img(src="/images/rsvp.png")
-		!= partial('rsvp/rsvp', rsvp)
-		p
-			a(href='/rsvps/search') Need to change your rsvp?
+  if rsvp_id
+    p Thanks for replying! You can change your rsvp
+      a(href='/rsvps/#{rsvp_id}/edit')
+        |  here
+    img(src="/images/etc.png")
+    p(style="width:344px") Only street parking is available near Parsons Garden, and may be limited the day of the wedding
+    p(style="width:344px") If you would be interested in organizing a carpool, baking a pie, or have any other questions, please post on our
+      a(href='/wall/')
+        |  wall
+  else
+    img(src="/images/rsvp.png")
+    != partial('rsvp/rsvp', rsvp)
+    p
+      a(href='/rsvps/search') Need to change your rsvp?
