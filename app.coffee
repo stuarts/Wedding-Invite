@@ -43,7 +43,7 @@ app.configure 'development', ->
   app.use express.errorHandler dumpExceptions: true, showStack: true
 
 app.configure 'production', ->
-  cron.start()
+  #cron.start()
   app.use express.errorHandler()
 
 # Routes
